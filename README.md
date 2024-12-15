@@ -12,6 +12,7 @@ $ docker rmi $(docker images -q)
 
 
 # ローカルテスト時との差分
+### なし ###
 batch/docker/test_docker-compose.yml
     build/volumes:　をコメントアウト #　マウントしないため
 
