@@ -25,5 +25,6 @@ jobs:
 
     - name: Run PyTest
       run: |
-        docker exec -it python_batch_a /bin/bash -c "python -m pytest"
-
+        docker-compose exec -T python_batch_a /bin/bash -c "python -m pytest"
+#        docker exec -it python_batch_a /bin/bash -c "python -m pytest"
+        

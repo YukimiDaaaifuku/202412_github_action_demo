@@ -21,3 +21,9 @@ COPY ./test_batch_requirements.txt /batch/docker
 COPY ../../batch /batch
 
 
+
+
+docker exec -it python_batch_a /bin/bash -c "python -m pytest"
+docker-compose exec -T python_batch_a /bin/bash -c "python -m pytest"
+
+
