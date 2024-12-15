@@ -25,5 +25,5 @@ jobs:
 
     - name: Run PyTest
       run: |
-        docker compose exec -t python_batch_a /bin/bash -c "PYTEST_CONFIG=/tests/pytest.ini python -m pytest"
+        docker compose exec -t python_batch_a /bin/bash -c "PYTEST_CONFIG=/batch/tests/pytest.ini python -m pytest"
 
