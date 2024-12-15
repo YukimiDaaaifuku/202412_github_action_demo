@@ -14,8 +14,8 @@ services:
     
     tty: true
     #(マウント元(ホスト)):(マウント先)(コンテナ))
-    volumes:
-      - ../../batch:/batch
+    #volumes:
+    #  - ../../batch:/batch
     networks:
       - network1
   

@@ -11,3 +11,13 @@ $ docker compose -f ./batch/docker/test_docker-compose.yml down
 $ docker rmi $(docker images -q)
 
 
+# ローカルテスト時との差分
+batch/docker/test_docker-compose.yml
+    build/volumes:　をコメントアウト #　マウントしないため
+
+batch/docker/test_batch_Dockerfile
+COPY ./test_batch_requirements.txt /batch/docker
+ ↓
+COPY ../../batch /batch
+
+
