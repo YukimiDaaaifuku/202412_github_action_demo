@@ -1,0 +1,28 @@
+name: Run PyTest on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v4
+      with:
+        version: latest
+
+    - name: Build and Run Docker Compose
+      run: |
+        docker compose -f ./batch/docker/test_docker-compose.yml build
+        docker compose -f ./batch/docker/test_docker-compose.yml up -d
+
+    - name: Run PyTest
+      run: |
+        docker exec -it python_batch_a /bin/bash -c "python -m pytest"

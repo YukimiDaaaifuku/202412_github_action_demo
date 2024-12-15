@@ -1,0 +1,41 @@
+services:
+  #コンテナ名
+  python_batch_a:
+    container_name: python_batch_a
+    restart: always
+    build:
+      context: .
+      # ホスト側のパスは、docker-compose.yml が配置されているディレクトリからの相対パスです。
+      # volumeも同じ。
+      dockerfile: test_batch_Dockerfile
+
+    # docker-composeのworking_dirは、dockerfileのWORKDIRを継承
+    # working_dir: '/main'
+    
+    tty: true
+    #(マウント元(ホスト)):(マウント先)(コンテナ))
+    volumes:
+      - ../../batch:/batch
+    networks:
+      - network1
+  
+  #コンテナ名
+  test_db_cntr:
+    container_name: test_db_cntr
+    build:
+      context: .
+      dockerfile:  test_db_Dockerfile
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    # /docker-entrypoint-initdb.d に初期実行してほしいSQLを入れておくとコンテナ化するときに実行してくれる
+    volumes:
+      - ../../batch/tests/db_init:/docker-entrypoint-initdb.d
+    networks:
+      - network1
+
+networks:
+  network1:

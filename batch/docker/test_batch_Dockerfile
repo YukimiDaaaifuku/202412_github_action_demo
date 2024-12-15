@@ -1,0 +1,15 @@
+FROM python:3.13
+
+RUN mkdir -p /batch/docker
+
+# COPY (コピー元) (コピー先)
+# ホスト側のパスは、docker-compose.yml が配置されているディレクトリからの相対パスです。
+# volumeも同じ。
+COPY ./test_batch_requirements.txt /batch/docker
+
+
+WORKDIR /batch
+
+RUN pip install -r docker/test_batch_requirements.txt
+
+
